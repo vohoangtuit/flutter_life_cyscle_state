@@ -1,11 +1,15 @@
+
 import 'package:flutter/material.dart';
+import 'package:life_cycle_state/screen_one.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
+ // todo:  https://pub.dev/packages/need_resume   : current version 1.0.6
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,59 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ScreenOne(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage>  with WidgetsBindingObserver {
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Last notification: $_notification',
-            ),
-
-          ],
-        ),
-      ),
-
-    );
-  }
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-
-  }
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  AppLifecycleState _notification;
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    setState(() { _notification = state; });
-    print('state ${state.toString()}');
   }
 }
